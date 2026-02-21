@@ -57,8 +57,18 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
-    // OBTENER PRODUCTOS ACTIVOS/INACTIVOS
+    // ========== NUEVO: OBTENER PRODUCTOS ACTIVOS (PÚBLICO) ==========
+    // GET http://localhost:8083/products/active
+    @GetMapping("/active")
+    public ResponseEntity<List<ProductResponse>> getActiveProducts() {
+        log.info("GET /products/active - Get active products (public endpoint)");
+        List<ProductResponse> products = productService.getProductsByActiveStatus(true);
+        return ResponseEntity.ok(products);
+    }
+
+    // OBTENER PRODUCTOS POR ESTADO ACTIVO/INACTIVO (REQUIERE AUTENTICACIÓN)
     // GET http://localhost:8083/products/active/true
+    // GET http://localhost:8083/products/active/false
     @GetMapping("/active/{active}")
     @PreAuthorize("hasAnyRole('ADMIN', 'SELLER')")
     public ResponseEntity<List<ProductResponse>> getProductsByActiveStatus(@PathVariable Boolean active) {
