@@ -1,4 +1,3 @@
-
 INSERT INTO products (name, description, price, category, image_url, active) VALUES
 ('Samsung Galaxy A55 5G 128GB', 'Smartphone Samsung Galaxy A55 5G con pantalla Super AMOLED de 6.6", cámara triple de 50MP, batería 5000mAh y carga rápida 25W. Color Awesome Navy.', 1499.00, 'Electronics', 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=400', true),
 ('Apple iPhone 15 128GB', 'iPhone 15 con chip A16 Bionic, cámara principal de 48MP, pantalla Super Retina XDR de 6.1" y Dynamic Island. Color Negro Medianoche.', 4299.00, 'Electronics', 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400', true),
