@@ -42,10 +42,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         );
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-                log.debug("Autenticacion para el usuario: {} con rol: {}", email, role);
+                log.debug("User authentication: {} with role: {}", email, role);
             }
         } catch (Exception ex) {
-            log.error("No se pudo establecer la autenticación del usuario", ex);
+            log.error("User authentication could not be established", ex);
         }
         filterChain.doFilter(request, response);
     }

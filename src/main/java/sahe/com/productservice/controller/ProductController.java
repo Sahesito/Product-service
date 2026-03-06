@@ -21,7 +21,6 @@ public class ProductController {
 
     private final ProductService productService;
 
-    // OBTENER TODOS LOS PRODUCTOS
     // GET http://localhost:8083/products
     @GetMapping
     public ResponseEntity<List<ProductResponse>> getAllProducts() {
@@ -30,7 +29,6 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
-    // OBTENER PRODUCTO POR ID
     // GET http://localhost:8083/products/1
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponse> getProductById(@PathVariable Long id) {
@@ -39,7 +37,6 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
 
-    // BUSCAR PRODUCTOS POR NOMBRE
     // GET http://localhost:8083/products/search?name=laptop
     @GetMapping("/search")
     public ResponseEntity<List<ProductResponse>> searchProducts(@RequestParam String name) {
@@ -48,7 +45,6 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
-    // OBTENER PRODUCTOS POR CATEGORÍA
     // GET http://localhost:8083/products/category/Electronics
     @GetMapping("/category/{category}")
     public ResponseEntity<List<ProductResponse>> getProductsByCategory(@PathVariable String category) {
@@ -57,7 +53,6 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
-    // ========== NUEVO: OBTENER PRODUCTOS ACTIVOS (PÚBLICO) ==========
     // GET http://localhost:8083/products/active
     @GetMapping("/active")
     public ResponseEntity<List<ProductResponse>> getActiveProducts() {
@@ -66,7 +61,6 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
-    // OBTENER PRODUCTOS POR ESTADO ACTIVO/INACTIVO (REQUIERE AUTENTICACIÓN)
     // GET http://localhost:8083/products/active/true
     // GET http://localhost:8083/products/active/false
     @GetMapping("/active/{active}")
@@ -77,7 +71,6 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
-    // OBTENER PRODUCTOS POR CATEGORÍA Y ESTADO
     // GET http://localhost:8083/products/category/Electronics/active/true
     @GetMapping("/category/{category}/active/{active}")
     public ResponseEntity<List<ProductResponse>> getProductsByCategoryAndActive(
@@ -88,7 +81,6 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
-    // CREAR PRODUCTO
     // POST http://localhost:8083/products
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'SELLER')")
@@ -98,7 +90,6 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
     }
 
-    // ACTUALIZAR PRODUCTO
     // PUT http://localhost:8083/products/1
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'SELLER')")
@@ -110,7 +101,6 @@ public class ProductController {
         return ResponseEntity.ok(updatedProduct);
     }
 
-    // ELIMINAR PRODUCTO (Soft Delete)
     // DELETE http://localhost:8083/products/1
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
@@ -120,7 +110,6 @@ public class ProductController {
         return ResponseEntity.noContent().build();
     }
 
-    // ELIMINAR PRODUCTO PERMANENTEMENTE
     // DELETE http://localhost:8083/products/1/permanent
     @DeleteMapping("/{id}/permanent")
     @PreAuthorize("hasRole('ADMIN')")
@@ -130,7 +119,6 @@ public class ProductController {
         return ResponseEntity.noContent().build();
     }
 
-    // REACTIVAR PRODUCTO
     // PATCH http://localhost:8083/products/1/reactivate
     @PatchMapping("/{id}/reactivate")
     @PreAuthorize("hasAnyRole('ADMIN', 'SELLER')")
